@@ -1,19 +1,28 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema( {
-    firstName: String,
-    lastName: String,
-    mobile: {
-        type: String,
-        unique: true,
-        required: true
+    
+    name:{
+        type:String,
+        required:true
     },
-    emailId: String,
-    gender: {
-        type: String,
-        enum: ["male", "female", "LGBTQ"] //"falana" will give an error
+    balance:{
+        type:Number,  // Default balance at user registration is 100
+        default:100
     },
-    age: Number,
+    address:String,
+    age:Number,
+    gender:{
+        type:String,   // Allowed values are - “male”, “female”, “other”
+        enum:['male','female','other']   
+     },
+     isFreeAppUser:{
+         type:Boolean,  // Default false value.
+         default:false
+        }
+
+         
+    }
     // isIndian: Boolean,
     // parentsInfo: {
     //     motherName: String,
@@ -21,7 +30,7 @@ const userSchema = new mongoose.Schema( {
     //     siblingName: String
     // },
     // cars: [ String  ]
-}, { timestamps: true });
+, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema) //users
 
